@@ -1,0 +1,47 @@
+{
+  "name": "nuber-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hufs-dely/nuber-server",
+  "author": "rkdcndrb <kang5858111@naver.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "class-validator": "^0.9.1",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.4",
+    "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
+    "merge-graphql-schemas": "^1.5.8",
+    "morgan": "^1.9.1",
+    "pg": "^7.10.0",
+    "twilio": "^3.30.2",
+    "typeorm": "^0.2.16"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cors": "^2.8.5",
+    "@types/helmet": "^0.0.43",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/mailgun-js": "^0.16.3",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^11.13.8",
+    "@types/twilio": "^0.0.10",
+    "babel-runtime": "^6.26.0",
+    "gql-merge": "^0.0.6",
+    "graphql-to-typescript": "^0.1.2",
+    "nodemon": "^1.18.11",
+    "ts-node": "^8.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "predev": "yarn run types",
+    "dev": "cd src && nodemon --exec ts-node index.ts -e ts.graphql",
+    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
+  }
+}
