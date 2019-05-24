@@ -39,6 +39,8 @@ type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  PhoneSignIn(phoneNumber: String!, password: String!): PhoneSignInResponse!
+  PhoneSignUp(firstName: String!, lastName: String!, password: String!, age: Int!, phoneNumber: String!): PhoneSignUpResponse!
   ReportMovement(orientation: Float, lastLat: Float, lastLng: Float): ReportMovementResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
@@ -195,6 +197,18 @@ type GetNearbyDriversResponse {
   ok: Boolean!
   error: String
   drivers: [User]
+}
+
+type PhoneSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type PhoneSignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type ReportMovementResponse {

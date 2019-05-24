@@ -1,0 +1,15 @@
+type PhoneSignUpResponse {
+    ok : Boolean!
+    error : String
+    token : String
+}
+
+type Mutation {
+    PhoneSignUp(
+        firstName : String!
+        lastName : String!
+        password : String!
+        age : Int!
+        phoneNumber : String!
+    ) :PhoneSignUpResponse!
+}
