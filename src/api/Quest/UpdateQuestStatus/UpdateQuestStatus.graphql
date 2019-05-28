@@ -1,4 +1,4 @@
-type UpdateRideStatusResponse{
+type UpdateQuestStatusResponse{
     ok : Boolean!
     error : String
 }
@@ -12,6 +12,6 @@ enum StatusOptions {
 }
 
 type Mutation {
-    UpdateRideStatus(rideId : Int!
-    status : StatusOptions!) : UpdateRideStatusResponse!
+    UpdateQuestStatus(questId : Int!
+    status : StatusOptions!) : UpdateQuestStatusResponse!
 }

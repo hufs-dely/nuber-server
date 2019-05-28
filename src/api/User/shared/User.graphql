@@ -10,18 +10,18 @@ type User {
     verifiedPhoneNumber : Boolean!
     profilePhoto : String
     fullName : String
-    isDriving : Boolean!
-    isRiding : Boolean!
-    isTaken : Boolean!
+    isDelying : Boolean!
+    isQuesting : Boolean!
+    isMatched : Boolean!
     lastLng : Float
     lastLat : Float
     lastOrientation : Float
     fbId : String
     messages : [Message]
-    ridesAsPassenger : [Ride]
-    ridesAsDriver : [Ride]
-    chatsAsDriver : [Chat]
-    chatsAsPassenger : [Chat]
+    questAsCustomer : [Quest]
+    questAsDeliver : [Quest]
+    chatsAsDeliver : [Chat]
+    chatsAsCustomer : [Chat]
     places: [Place]
     createdAt : String!
     updatedAt : String

@@ -3,13 +3,13 @@ import User from "../../../entities/User";
 
 const resolvers = {
   Subscription: {
-    NearbyRideSubscription: {
+    NearbyQuestSubscription: {
       subscribe: withFilter(
-        (_, __, { pubSub }) => pubSub.asyncIterator("rideRequest"),
+        (_, __, { pubSub }) => pubSub.asyncIterator("questRequest"),
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
-            NearbyRideSubscription: { pickUpLat, pickUpLng }
+            NearbyQuestSubscription: { pickUpLat, pickUpLng }
           } = payload;
           const { lastLat: userLastLat, lastLng: userLastLng } = user;
           return (

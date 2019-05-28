@@ -13,7 +13,7 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
-import Ride from "./Ride";
+import Quest from "./Quest";
 import Place from "./Place";
 
 const BCRYPT_ROUNDS = 10;
@@ -51,13 +51,13 @@ class User extends BaseEntity {
     profilePhoto : string;
     
     @Column({type : "boolean", default : false})
-    isDriving : boolean;
+    isDelying : boolean;
 
     @Column({type : "boolean", default : false})
-    isRiding : boolean;
+    isQuesting : boolean;
 
     @Column({type : "boolean", default : false})
-    isTaken : boolean;
+    isMatched : boolean;
 
     @Column({type : "double precision", default : 0})
     lastLng : number;
@@ -71,20 +71,20 @@ class User extends BaseEntity {
     @Column({type : "text", nullable : true})
     fbId : string;
 
-    @OneToMany(type => Chat, chat => chat.passenger)
-    chatsAsPassenger : Chat[]
+    @OneToMany(type => Chat, chat => chat.customer)
+    chatsAsCustomer : Chat[]
 
-    @OneToMany(type => Chat, chat => chat.driver)
-    chatsAsDriver : Chat[]
+    @OneToMany(type => Chat, chat => chat.deliver)
+    chatsAsDeliver : Chat[]
 
     @OneToMany(type => Message, message => message.user)
     messages : Message[]
 
-    @OneToMany(type => Ride, ride => ride.passenger)
-    ridesAsPassenger : Ride[]
+    @OneToMany(type => Quest, quest => quest.customer)
+    questAsCustomer : Quest[]
 
-    @OneToMany(type => Ride, ride => ride.driver)
-    ridesAsDriver : Ride[]
+    @OneToMany(type => Quest, quest => quest.deliver)
+    questAsDeliver : Quest[]
 
     @OneToMany(type => Place, place => place.user)
     places : Place[];

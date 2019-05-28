@@ -1,13 +1,13 @@
 import User from "../../../entities/User";
-import { ToggleDrivingModeResponse } from "src/types/graph";
+import { ToggleDeliveringModeResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers : Resolvers = {
     Mutation : {
-        ToggleDrivingMode : privateResolver(async(_, __, { req }) : Promise<ToggleDrivingModeResponse> => {
+        ToggleDeliveringMode : privateResolver(async(_, __, { req }) : Promise<ToggleDeliveringModeResponse> => {
             const user : User = req.user;
-            user.isDriving = !user.isDriving;
+            user.isDelying = !user.isDelying;
             user.save();
             return {
                 ok : true,

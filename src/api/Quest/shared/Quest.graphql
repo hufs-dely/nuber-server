@@ -1,4 +1,4 @@
-type Ride {
+type Quest {
     id : Int!
     status : String!
     pickUpAddress : String!
@@ -10,10 +10,10 @@ type Ride {
     price : Float!
     distance : String!
     duration : String!
-    driverId : Int
-    driver : User!
-    passengerId : Int!
-    passenger : User!
+    deliverId : Int
+    deliver : User!
+    customerId : Int!
+    customer : User!
     chat : Chat
     chatId : Int
     createdAt : String!

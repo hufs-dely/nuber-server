@@ -12,7 +12,7 @@ const resolvers : Resolvers = {
             try{
                 await User.update({id : user.id},{...notNull});
                 const updateUser = await User.findOne({ id : user.id});
-                pubSub.pulish("driverUpdate",{DriversSubscription: updateUser} );
+                pubSub.pulish("deliverUpdate",{DeliversSubscription: updateUser} );
                 return {
                     ok : true,
                     error : null

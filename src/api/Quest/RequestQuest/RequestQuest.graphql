@@ -1,11 +1,11 @@
-type RequestRideResponse{
+type RequestQuestResponse{
     ok : Boolean!
     error :String
-    ride : Ride
+    quest : Quest
 }
 
 type Mutation{
-    RequestRide(
+    RequestQuest(
         pickUpAddress : String!
         pickUpLat : Float!
         pickUpLng : Float!
@@ -15,5 +15,5 @@ type Mutation{
         price : Float!
         distance : String!
         duration : String!
-    ) : RequestRideResponse!
+    ) : RequestQuestResponse!
 }

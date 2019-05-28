@@ -13,7 +13,7 @@ const resolvers : Resolvers = {
                     id : args.chatId
                 }, {relations : ["messages"]});
                 if(chat){
-                    if(chat.passengerId === user.id || chat.driverId === user.id){
+                    if(chat.customerId === user.id || chat.deliverId === user.id){
                         return {
                             ok : true,
                             error : null,

@@ -1,36 +1,36 @@
-import Ride from "../../../entities/Ride";
+import Quest from "../../../entities/Quest";
 import User from "../../../entities/User";
-import { RequestRideMutationArgs, RequestRideResponse } from "src/types/graph";
+import { RequestQuestMutationArgs, RequestQuestResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers : Resolvers = {
     Mutation : {
-        RequestRide : privateResolver(async(_, args : RequestRideMutationArgs, { req, PubSub }): Promise<RequestRideResponse> => {
+        RequestQuest : privateResolver(async(_, args : RequestQuestMutationArgs, { req, PubSub }): Promise<RequestQuestResponse> => {
             const user : User = req.user;
-            if(!user.isRiding && !user.isDriving){
+            if(!user.isQuesting && !user.isDelying){
                 try{
-                    const ride = await Ride.create({...args, passenger : user}).save();
-                    PubSub.publish("rideRequest", { NearbyRideSubscription: ride});
-                    user.isRiding = true;
+                    const quest = await Quest.create({...args, customer : user}).save();
+                    PubSub.publish("questRequest", { NearbyQuestSubscription: quest});
+                    user.isQuesting = true;
                     user.save();
                     return {
                         ok : true,
                         error : null,
-                        ride
+                        quest
                     }
                 }catch(error){
                     return {
                         ok : false,
                         error : error.message,
-                        ride : null
+                        quest : null
                     };
                 }
             }else{
                 return {
                     ok :false,
-                    error : "you cant request two rides or drive and request",
-                    ride : null
+                    error : "you cant request two quests or delivery and request",
+                    quest : null
                 };
             }
         })

@@ -7,18 +7,18 @@ type GetChatResponse {
 type Query {
   GetChat(chatId: Int!): GetChatResponse!
   GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyRide: GetNearbyRideResponse!
-  GetRide(rideId: Int!): GetRideResponse!
+  GetNearbyQuest: GetNearbyQuestResponse!
+  GetQuest(questId: Int!): GetQuestResponse!
   GetMyProfile: GetMyProfileResponse!
-  GetNearbyDrivers: GetNearbyDriversResponse!
+  GetNearbyDelivers: GetNearbyDeliversResponse!
   user: User
 }
 
 type Subscription {
   MessageSubscription: Message
-  NearbyRideSubscription: Ride
-  RideStatusSubscription: Ride
-  DriversSubscription: User
+  NearbyQuestSubscription: Quest
+  QuestStatusSubscription: Quest
+  DeliversSubscription: User
 }
 
 type SendChatMessageResponse {
@@ -32,8 +32,8 @@ type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
-  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
-  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
+  RequestQuest(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestQuestResponse!
+  UpdateQuestStatus(questId: Int!, status: StatusOptions!): UpdateQuestStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -44,19 +44,19 @@ type Mutation {
   ReportMovement(orientation: Float, lastLat: Float, lastLng: Float): ReportMovementResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
-  ToggleDrivingMode: ToggleDrivingModeResponse!
+  ToggleDeliveringMode: ToggleDeliveringModeResponse!
   UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
 }
 
 type Chat {
   id: Int!
   messages: [Message]
-  passengerId: Int!
-  passenger: User!
-  driverId: Int!
-  driver: User!
-  ride: Ride!
-  rideId: Int
+  customerId: Int!
+  customer: User!
+  deliverId: Int!
+  deliver: User!
+  quest: Quest!
+  questId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -105,25 +105,25 @@ type Place {
   updatedAt: String
 }
 
-type GetNearbyRideResponse {
+type GetNearbyQuestResponse {
   ok: Boolean!
   error: String
-  ride: Ride
+  quest: Quest
 }
 
-type GetRideResponse {
+type GetQuestResponse {
   ok: Boolean!
   error: String
-  ride: Ride
+  quest: Quest
 }
 
-type RequestRideResponse {
+type RequestQuestResponse {
   ok: Boolean!
   error: String
-  ride: Ride
+  quest: Quest
 }
 
-type Ride {
+type Quest {
   id: Int!
   status: String!
   pickUpAddress: String!
@@ -135,17 +135,17 @@ type Ride {
   price: Float!
   distance: String!
   duration: String!
-  driverId: Int
-  driver: User!
-  passengerId: Int!
-  passenger: User!
+  deliverId: Int
+  deliver: User!
+  customerId: Int!
+  customer: User!
   chat: Chat
   chatId: Int
   createdAt: String!
   updatedAt: String
 }
 
-type UpdateRideStatusResponse {
+type UpdateQuestStatusResponse {
   ok: Boolean!
   error: String
 }
@@ -193,10 +193,10 @@ type GetMyProfileResponse {
   user: User
 }
 
-type GetNearbyDriversResponse {
+type GetNearbyDeliversResponse {
   ok: Boolean!
   error: String
-  drivers: [User]
+  delivers: [User]
 }
 
 type PhoneSignInResponse {
@@ -233,18 +233,18 @@ type User {
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
   fullName: String
-  isDriving: Boolean!
-  isRiding: Boolean!
-  isTaken: Boolean!
+  isDelying: Boolean!
+  isQuesting: Boolean!
+  isMatched: Boolean!
   lastLng: Float
   lastLat: Float
   lastOrientation: Float
   fbId: String
   messages: [Message]
-  ridesAsPassenger: [Ride]
-  ridesAsDriver: [Ride]
-  chatsAsDriver: [Chat]
-  chatsAsPassenger: [Chat]
+  questAsCustomer: [Quest]
+  questAsDeliver: [Quest]
+  chatsAsDeliver: [Chat]
+  chatsAsCustomer: [Chat]
   places: [Place]
   createdAt: String!
   updatedAt: String
@@ -255,7 +255,7 @@ type StartPhoneVerificationResponse {
   error: String
 }
 
-type ToggleDrivingModeResponse {
+type ToggleDeliveringModeResponse {
   ok: Boolean!
   error: String
 }

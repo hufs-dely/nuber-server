@@ -1,0 +1,9 @@
+type GetQuestResponse{
+    ok : Boolean!
+    error : String
+    quest : Quest
+}
+
+type Query{
+    GetQuest(questId : Int!) : GetQuestResponse!
+}

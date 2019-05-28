@@ -1,47 +1,47 @@
 import { Between, getRepository } from "typeorm";
-import Ride from "../../../entities/Ride";
+import Quest from "../../../entities/Quest";
 import User from "../../../entities/User";
-import { GetNearbyRideResponse } from "src/types/graph";
+import { GetNearbyQuestResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
     Query : {
-        GetNearbyRide: privateResolver(async(_, __, {req}): Promise<GetNearbyRideResponse>=> {
+        GetNearbyQuest: privateResolver(async(_, __, {req}): Promise<GetNearbyQuestResponse>=> {
             const user : User =req.user;
-            if(user.isDriving){
+            if(user.isDelying){
                 const {lastLat, lastLng} = user;
                 try{
-                    const ride = await getRepository(Ride).findOne({
+                    const quest = await getRepository(Quest).findOne({
                         status : "REQUESTING",
                         pickUpLat : Between(lastLat - 0.05, lastLat + 0.05),
                         pickUpLng : Between(lastLng - 0.05, lastLng + 0.05)
                     });
-                    if(ride){
+                    if(quest){
                         return {
                             ok : true,
                             error : null,
-                            ride
+                            quest
                         };
                     }else{
                         return{
                             ok : true,
                             error : null,
-                            ride : null
+                            quest : null
                         };
                     }
                 }catch(error){
                     return {
                         ok : false,
                         error : error.message,
-                        ride : null
+                        quest : null
                     };
                 }
             }else{
                 return {
                     ok : false,
-                    error : "you are not a driver",
-                    ride : null
+                    error : "you are not a deliver",
+                    quest : null
                 };
             }
         })

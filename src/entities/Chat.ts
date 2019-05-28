@@ -1,7 +1,7 @@
 import { BaseEntity, Column , CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, OneToOne} from "typeorm";
-import Ride from "./Ride";
 import Message from "./Message";
 import User from "./User";
+import Quest from "./Quest";
 
 @Entity()
 class Chat extends BaseEntity{
@@ -10,26 +10,26 @@ class Chat extends BaseEntity{
     @OneToMany(type => Message, message => message.chat)
     messages : Message[];
     
-    @ManyToOne(type => User, user => user.chatsAsPassenger)
-    passenger : User;
+    @ManyToOne(type => User, user => user.chatsAsCustomer)
+    customer : User;
 
     @Column({ nullable: true })
-    passengerId: number;
+    customerId: number;
 
-    @OneToOne(type => Ride, ride => ride.chat)
+    @OneToOne(type => Quest, quest => quest.chat)
     chat : Chat;
 
-    @ManyToOne(type => User, user => user.chatsAsDriver)
-    driver : User;
+    @ManyToOne(type => User, user => user.chatsAsDeliver)
+    deliver : User;
 
     @Column({nullable : true})
-    driverId : number;
+    deliverId : number;
 
-    @OneToOne(type => Ride, ride =>ride.chat)
-    ride : Ride;
+    @OneToOne(type => Quest, quest =>quest.chat)
+    quest : Quest;
 
     @Column({nullable : true})
-    rideId : number;
+    questId : number;
 
     @CreateDateColumn() createdAt : string;
     @UpdateDateColumn() updatedAt : string;

@@ -1,0 +1,9 @@
+type GetNearbyQuestResponse{
+    ok : Boolean!
+    error : String
+    quest : Quest
+}
+
+type Query{
+    GetNearbyQuest: GetNearbyQuestResponse!
+}

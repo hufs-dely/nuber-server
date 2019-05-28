@@ -12,7 +12,7 @@ const resolvers : Resolvers = {
             try {
                 const chat = await Chat.findOne({id : args.chatId});
                 if(chat){
-                    if(chat.passengerId === user.id || chat.driverId === user.id){
+                    if(chat.customerId === user.id || chat.deliverId === user.id){
                         const message = await Message.create({
                             text :args.text,
                             chat,

@@ -1,0 +1,8 @@
+type ToggleDeliveringModeResponse{
+    ok: Boolean!
+    error : String
+}
+
+type Mutation {
+    ToggleDeliveringMode : ToggleDeliveringModeResponse!
+}

@@ -15,7 +15,7 @@ const resolvers = {
           try{
             const chat = await Chat.findOne({id : chatId});
             if(chat){
-                return chat.driverId === user.id || chat.passengerId === user.id;
+                return chat.deliverId === user.id || chat.customerId === user.id;
             }else{
                 return false
             }

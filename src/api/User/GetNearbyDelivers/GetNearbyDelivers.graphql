@@ -1,0 +1,9 @@
+type GetNearbyDeliversResponse{
+    ok : Boolean!
+    error : String
+    delivers : [User]
+}
+
+type Query{
+    GetNearbyDelivers : GetNearbyDeliversResponse!
+}

@@ -1,43 +1,43 @@
-import Ride from "../../../entities/Ride";
+import Quest from "../../../entities/Quest";
 import User from "../../../entities/User";
-import { GetRideResponse, GetRideQueryArgs } from "src/types/graph";
+import { GetQuestResponse, GetQuestQueryArgs } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers : Resolvers = {
     Query : {
-        GetRide: privateResolver(async(_, args : GetRideQueryArgs, {req}) : Promise<GetRideResponse>=> {
+        GetQuest: privateResolver(async(_, args : GetQuestQueryArgs, {req}) : Promise<GetQuestResponse>=> {
             const user : User = req.user;
             try{
-                const ride = await Ride.findOne({
-                    id : args.rideId
-                }, { relations : ["passenger", "driver"]});
-                if(ride){
-                    if(ride.passengerId === user.id || ride.driverId === user.id){
+                const quest = await Quest.findOne({
+                    id : args.questId
+                }, { relations : ["customer", "deliver"]});
+                if(quest){
+                    if(quest.customerId === user.id || quest.deliverId === user.id){
                         return {
                             ok : false,
                             error : null,
-                            ride
+                            quest
                         };
                     }else{
                         return {
                             ok : false,
                             error : "Not Authorized",
-                            ride : null
+                            quest : null
                         };
                     }
                 }else{
                     return {
                         ok :false,
-                        error : "Ride not found",
-                        ride : null
+                        error : "Quest not found",
+                        quest : null
                     };
                 }
             }catch(error){
                 return {
                     ok : false,
                     error : error.message,
-                    ride : null
+                    quest : null
                 };
             }
         })
