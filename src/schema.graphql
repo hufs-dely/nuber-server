@@ -32,6 +32,7 @@ type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  UpdateProduct(product: String!, fragile: Boolean!, product_price: Float!, weight_estimated: Float!): UpdateProductResponse!
   RequestQuest(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestQuestResponse!
   UpdateQuestStatus(questId: Int!, status: StatusOptions!): UpdateQuestStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
@@ -103,6 +104,23 @@ type Place {
   user: User!
   createdAt: String!
   updatedAt: String
+}
+
+type Product {
+  id: Int!
+  product: String!
+  fragile: Boolean!
+  product_price: Float!
+  weight_estimated: Float!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type UpdateProductResponse {
+  ok: Boolean!
+  error: String
+  product: Product
 }
 
 type GetNearbyQuestResponse {

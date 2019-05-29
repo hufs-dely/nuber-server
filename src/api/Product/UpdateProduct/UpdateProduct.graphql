@@ -1,0 +1,14 @@
+type UpdateProductResponse {
+    ok : Boolean!
+    error : String
+    product : Product
+}
+
+type Mutation{
+    UpdateProduct(
+        product : String!
+        fragile : Boolean!
+        product_price : Float!
+        weight_estimated : Float!
+    ) : UpdateProductResponse!
+}

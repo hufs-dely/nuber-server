@@ -1,0 +1,10 @@
+type Product {
+    id : Int!
+    product : String!
+    fragile : Boolean!
+    product_price : Float!
+    weight_estimated : Float!
+    user : User!
+    createdAt : String!
+    updatedAt : String
+}

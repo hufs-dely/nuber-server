@@ -1,4 +1,6 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToOne, ManyToOne } from "typeorm";
+import Quest from "./Quest";
+import User from "./User";
 
 @Entity()
 class Product extends BaseEntity{
@@ -6,9 +8,6 @@ class Product extends BaseEntity{
 
     @Column({type : "text"})
     product : string;
-
-    @Column({type : "boolean", default : false})
-    money_usage : boolean;
 
     @Column({type : "boolean", default: false})
     fragile : boolean;
@@ -19,8 +18,11 @@ class Product extends BaseEntity{
     @Column({type : "double precision", default : 0})
     weight_estimated : number;
 
-    @Column({type : "text"})
-    volume_estimated : string;
+    @OneToOne(type => Quest, quest => quest.product)
+    quest : Quest
+
+    @ManyToOne(type => User, user => user.product)
+    user : User
 
     @CreateDateColumn() createdAt : string;
     @UpdateDateColumn() updatedAt : string;

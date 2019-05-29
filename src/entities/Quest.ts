@@ -2,6 +2,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, On
 import { questStatus } from "../types/types";
 import Chat from "./Chat";
 import User from "./User";
+import Product from "./Product";
 
 @Entity()
 class Quest extends BaseEntity{
@@ -54,6 +55,9 @@ class Quest extends BaseEntity{
 
     @Column({nullable : true})
     chatId : number;
+
+    @OneToOne(type => Product, product => product.quest)
+    product : Product
 
     @OneToOne(type => Chat, chat => chat.quest, {nullable : true})
     @JoinColumn()
